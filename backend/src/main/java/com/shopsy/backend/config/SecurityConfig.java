@@ -36,6 +36,7 @@ public class SecurityConfig {
             .authorizeHttpRequests().requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .requestMatchers("/api/auth/**").permitAll()
             .requestMatchers("/images/**").permitAll()
+            .requestMatchers("/actuator/**").permitAll() // Allow actuator for health checks
             .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll() // Allow GET for all products
             .requestMatchers("/api/admin/**").hasRole("ADMIN") // Admin endpoints only for ADMIN role
             .requestMatchers("/api/orders/**").hasRole("USER") // Orders endpoints only for USER role
@@ -69,7 +70,9 @@ public class SecurityConfig {
             "http://127.0.0.1:3000",
             "http://127.0.0.1:4200",
             "http://127.0.0.1:5173",
-            "http://127.0.0.1:5174"
+            "http://127.0.0.1:5174",
+            "http://localhost",
+            "http://localhost:80"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList(

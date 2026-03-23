@@ -10,6 +10,11 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+
 # Logs
 logs
 *.log
