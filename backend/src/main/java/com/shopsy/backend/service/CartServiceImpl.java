@@ -36,7 +36,7 @@ public class CartServiceImpl implements CartService {
         logger.info("Creating cart for userId: {}", userId);
         User user = userService.findUserById(userId);
         logger.info("User found: {}", user);
-        Cart existingCart = cartRepository.findByUser(user);
+        Cart existingCart = cartRepository.findByUserWithItems(user);
         logger.info("Existing cart: {}", existingCart);
         if (existingCart != null) {
             return existingCart;
@@ -84,7 +84,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart getCartByUser(Long userId) {
         logger.info("Getting cart for userId: {}", userId);
-        return createCart(userId);
+        User user = userService.findUserById(userId);
+        return cartRepository.findByUserWithItems(user);
     }
 
 }

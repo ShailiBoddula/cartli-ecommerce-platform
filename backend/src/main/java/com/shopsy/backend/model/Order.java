@@ -22,7 +22,7 @@ public class Order {
     @com.fasterxml.jackson.annotation.JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<OrderItem> orderItems;
 
     @Column(name = "order_date", nullable = false)
@@ -84,6 +84,9 @@ public class Order {
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+        if (orderItems != null) {
+            orderItems.forEach(oi -> oi.setOrder(this));
+        }
     }
 
     public LocalDateTime getOrderDate() {

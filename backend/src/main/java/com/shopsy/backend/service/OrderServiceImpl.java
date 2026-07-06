@@ -52,24 +52,25 @@ public class OrderServiceImpl implements OrderService {
         User user = userService.findUserById(userId);
         Cart cart = cartService.getCartByUser(userId);
 
-        // Associate address with user and save it
         shippingAddress.setUser(user);
         shippingAddress = addressRepository.save(shippingAddress);
+
+        Order order = new Order(user, new ArrayList<>(), BigDecimal.ZERO, shippingAddress);
 
         List<OrderItem> orderItems = new ArrayList<>();
         BigDecimal total = BigDecimal.ZERO;
 
         for (CartItem ci : cart.getItems()) {
             BigDecimal price = BigDecimal.valueOf(ci.getProduct().getPrice());
-            OrderItem oi = new OrderItem(null, ci.getProduct(), ci.getQuantity(), ci.getSize(), price);
+            OrderItem oi = new OrderItem(order, ci.getProduct(), ci.getQuantity(), ci.getSize(), price);
             orderItems.add(oi);
             total = total.add(price.multiply(BigDecimal.valueOf(ci.getQuantity())));
         }
 
-        Order order = new Order(user, orderItems, total, shippingAddress);
+        order.setOrderItems(orderItems);
+        order.setTotalPrice(total);
         order = orderRepository.save(order);
 
-        // Clear cart items
         for (CartItem ci : cart.getItems()) {
             cartItemRepository.delete(ci);
         }
