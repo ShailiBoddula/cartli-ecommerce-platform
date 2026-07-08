@@ -44,10 +44,8 @@ function App() {
           {/* Admin routes - protected */}
           <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
             <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="products" element={<ProductManagement />} />
+              <Route index element={<AddProductForm />} />
               <Route path="add-product" element={<AddProductForm />} />
-              <Route path="orders" element={<OrderManagement />} />
             </Route>
           </Route>
         </Routes>

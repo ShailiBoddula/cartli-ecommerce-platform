@@ -24,26 +24,6 @@ const AdminLayout = () => {
           <nav className="mt-5 px-2">
             <div className="space-y-1">
               <Link
-                to="/admin"
-                className={`block px-3 py-2 rounded-md text-sm font-medium ${
-                  isActive('/admin')
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                Dashboard
-              </Link>
-              <Link
-                to="/admin/products"
-                className={`block px-3 py-2 rounded-md text-sm font-medium ${
-                  isActive('/admin/products')
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                Products
-              </Link>
-              <Link
                 to="/admin/add-product"
                 className={`block px-3 py-2 rounded-md text-sm font-medium ${
                   isActive('/admin/add-product')
@@ -52,16 +32,6 @@ const AdminLayout = () => {
                 }`}
               >
                 Add Product
-              </Link>
-              <Link
-                to="/admin/orders"
-                className={`block px-3 py-2 rounded-md text-sm font-medium ${
-                  isActive('/admin/orders')
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                Orders
               </Link>
             </div>
           </nav>
