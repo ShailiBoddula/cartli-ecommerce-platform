@@ -9,6 +9,7 @@ import ProductsPage from './customer/components/pages/ProductsPage';
 import CartPage from './customer/components/pages/CartPage';
 import CheckoutPage from './customer/components/pages/CheckoutPage';
 import OrdersPage from './customer/components/pages/OrdersPage';
+import OrderSuccessPage from './customer/components/pages/OrderSuccessPage';
 
 // ✅ ADD THIS
 import ProductDetails from './customer/components/pages/ProductDetails';
@@ -36,6 +37,7 @@ function App() {
           <Route path="/product/:id" element={<Navbar><ProductDetails /></Navbar>} /> {/* ✅ THIS */}
           <Route path="/cart" element={<Navbar><CartPage /></Navbar>} />
           <Route path="/checkout" element={<Navbar><CheckoutPage /></Navbar>} />
+          <Route path="/order-success" element={<OrderSuccessPage />} />
           <Route path="/orders" element={<Navbar><OrdersPage /></Navbar>} />
           <Route path="/company" element={<Navbar><CompanyPage /></Navbar>} />
 
