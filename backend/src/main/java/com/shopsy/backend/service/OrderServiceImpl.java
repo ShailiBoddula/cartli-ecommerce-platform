@@ -41,16 +41,26 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findAll();
     }
 
-    @Override
+@Override
     public void deleteOrder(Long orderId) {
         Order order = getOrderById(orderId);
         orderRepository.delete(order);
     }
 
     @Override
+    public List<Order> getOrdersByUser(Long userId) {
+        User user = userService.findUserById(userId);
+        return orderRepository.findByUser(user);
+    }
+
+    @Override
     public Order placeOrder(Long userId, Address shippingAddress) {
         User user = userService.findUserById(userId);
         Cart cart = cartService.getCartByUser(userId);
+
+        if (cart == null) {
+            throw new RuntimeException("Cart is empty. Add items before placing an order.");
+        }
 
         shippingAddress.setUser(user);
         shippingAddress = addressRepository.save(shippingAddress);
@@ -76,12 +86,6 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return order;
-    }
-
-    @Override
-    public List<Order> getOrdersByUser(Long userId) {
-        User user = userService.findUserById(userId);
-        return orderRepository.findByUser(user);
     }
 
     @Override

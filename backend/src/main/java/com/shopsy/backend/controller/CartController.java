@@ -44,35 +44,41 @@ public class CartController {
         Long userId = getCurrentUserId();
         logger.debug("Fetching cart for user ID: {}", userId);
         Cart cart = cartService.getCartByUser(userId);
+        if (cart == null) {
+            cart = cartService.createCart(userId);
+        }
         return ResponseEntity.ok(cart);
     }
 
-   @PostMapping("/add/{productId}")
-public ResponseEntity<Cart> addItem(
-        @PathVariable Long productId,
-        @RequestBody Map<String, Object> request
-) {
-    logger.info("Add to cart request: {}, productId={}", request, productId);
+@PostMapping("/add/{productId}")
+    public ResponseEntity<Cart> addItem(
+            @PathVariable Long productId,
+            @RequestBody Map<String, Object> request
+    ) {
+        logger.info("Add to cart request: {}, productId={}", request, productId);
 
-    Long userId = getCurrentUserId();
-    Cart cart = cartService.getCartByUser(userId);
+        Long userId = getCurrentUserId();
+        Cart cart = cartService.getCartByUser(userId);
+        if (cart == null) {
+            cart = cartService.createCart(userId);
+        }
 
-    Integer quantity = (Integer) request.get("quantity");
-    String size = (String) request.get("size");
+        Integer quantity = (Integer) request.get("quantity");
+        String size = (String) request.get("size");
 
-    if (quantity == null || size == null) {
-        return ResponseEntity.badRequest().build();
+        if (quantity == null || size == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Cart updatedCart = cartService.addItemToCart(
+                cart.getId(),
+                productId,
+                quantity,
+                size
+        );
+
+        return ResponseEntity.ok(updatedCart);
     }
-
-    Cart updatedCart = cartService.addItemToCart(
-            cart.getId(),
-            productId,
-            quantity,
-            size
-    );
-
-    return ResponseEntity.ok(updatedCart);
-}
 
 
     @DeleteMapping("/remove/{itemId}")
