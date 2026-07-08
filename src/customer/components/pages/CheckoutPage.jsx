@@ -54,7 +54,6 @@ const handleRazorpayPayment = async (totalPrice, navigate, formData, cartItems, 
         clearCart();
 
         setToast({ message: 'Payment Successful! Your order has been placed.', type: 'success' });
-        setTimeout(() => navigate('/orders'), 1500);
         return;
       } catch (apiError) {
         console.error('API order creation failed, falling back to localStorage:', apiError);
@@ -86,7 +85,6 @@ const handleRazorpayPayment = async (totalPrice, navigate, formData, cartItems, 
     clearCart();
 
     setToast({ message: 'Payment Successful! Your order has been placed.', type: 'success' });
-    setTimeout(() => navigate('/orders'), 1500);
 
   } catch (error) {
     console.error('Payment failed:', error);
@@ -130,7 +128,6 @@ const handleCOD = async (totalPrice, navigate, formData, cartItems, clearCart, s
         clearCart();
 
         setToast({ message: 'Order placed successfully! You will pay cash on delivery.', type: 'success' });
-        setTimeout(() => navigate('/orders'), 1500);
         return;
       } catch (apiError) {
         console.error('API order creation failed, falling back to localStorage:', apiError);
@@ -162,7 +159,6 @@ const handleCOD = async (totalPrice, navigate, formData, cartItems, clearCart, s
     clearCart();
 
     setToast({ message: 'Order placed successfully! You will pay cash on delivery.', type: 'success' });
-    setTimeout(() => navigate('/orders'), 1500);
 
   } catch (error) {
     console.error('Order failed:', error);
