@@ -42,7 +42,7 @@ const DesktopNav = ({ isAuthModalOpen, setIsAuthModalOpen, authTab, setAuthTab }
     localStorage.removeItem('cartItems');
     localStorage.removeItem('savedAddress');
     localStorage.removeItem('mockOrders');
-    window.location.reload();
+    navigate('/');
   };
   return (
     <div className="flex items-center px-4 py-4 bg-white border-b border-gray-200">

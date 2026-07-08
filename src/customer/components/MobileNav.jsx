@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Bars3Icon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline';
 
 const MobileNav = ({ isAuthModalOpen, setIsAuthModalOpen, authTab, setAuthTab }) => {
@@ -7,10 +7,35 @@ const MobileNav = ({ isAuthModalOpen, setIsAuthModalOpen, authTab, setAuthTab })
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const user = JSON.parse(localStorage.getItem('user') || 'null');
   const isAdmin = user?.role === 'ADMIN';
+  const navigate = useNavigate();
 
   const handleLogout = () => {
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
+    
+    // Save current user's data before logout
+    if (user) {
+      const cartItems = localStorage.getItem('cartItems');
+      if (cartItems) {
+        localStorage.setItem(`cartItems_${user.id}`, cartItems);
+      }
+      
+      const savedAddress = localStorage.getItem('savedAddress');
+      if (savedAddress) {
+        localStorage.setItem(`savedAddress_${user.id}`, savedAddress);
+      }
+      
+      const mockOrders = localStorage.getItem('mockOrders');
+      if (mockOrders) {
+        localStorage.setItem(`mockOrders_${user.id}`, mockOrders);
+      }
+    }
+    
     localStorage.removeItem('user');
-    window.location.reload();
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('savedAddress');
+    localStorage.removeItem('mockOrders');
+    navigate('/');
   };
 
   return (
