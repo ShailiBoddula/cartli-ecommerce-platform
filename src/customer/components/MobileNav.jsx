@@ -22,12 +22,11 @@ const MobileNav = ({ isAuthModalOpen, setIsAuthModalOpen, authTab, setAuthTab })
         </button>
       </div>
       {isOpen && (
-        <div className="bg-white border-b border-gray-200">
-          <div className="flex flex-col space-y-4 px-4 py-4">
-            <Link to="/women" className="text-black hover:text-gray-900" onClick={() => setIsOpen(false)}>Women</Link>
-            <Link to="/men" className="text-black hover:text-gray-900" onClick={() => setIsOpen(false)}>Men</Link>
-            <Link to="/orders" className="text-black hover:text-gray-900" onClick={() => setIsOpen(false)}>Orders</Link>
-            <Link to="/company" className="text-black hover:text-gray-900" onClick={() => setIsOpen(false)}>Company</Link>
+<div className="bg-white border-b border-gray-200">
+           <div className="flex flex-col space-y-4 px-4 py-4">
+             <Link to="/women" className="text-black hover:text-gray-900" onClick={() => setIsOpen(false)}>Women</Link>
+             <Link to="/men" className="text-black hover:text-gray-900" onClick={() => setIsOpen(false)}>Men</Link>
+             <Link to="/company" className="text-black hover:text-gray-900" onClick={() => setIsOpen(false)}>Company</Link>
             {isAdmin && <Link to="/admin" className="text-black hover:text-gray-900" onClick={() => setIsOpen(false)}>Admin Dashboard</Link>}
             {user ? (
               <div className="relative">

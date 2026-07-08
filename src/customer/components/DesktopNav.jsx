@@ -53,7 +53,6 @@ const DesktopNav = ({ isAuthModalOpen, setIsAuthModalOpen, authTab, setAuthTab }
         <div className="hidden md:flex space-x-8">
           <button onClick={() => handleNavigate('/women')} className="text-black hover:text-gray-900">Women</button>
           <button onClick={() => handleNavigate('/men')} className="text-black hover:text-gray-900">Men</button>
-          <button onClick={() => handleNavigate('/orders')} className="text-black hover:text-gray-900">Orders</button>
           <button onClick={() => handleNavigate('/company')} className="text-black hover:text-gray-900">Company</button>
           {isAdmin && <button onClick={() => handleNavigate('/admin')} className="text-black hover:text-gray-900">Admin Dashboard</button>}
         </div>
